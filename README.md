@@ -55,3 +55,60 @@ public class Example {
     }
 }
 ```
+
+**1-2  String Concatenation** 
+
+**String concatenation** means joining two or more strings together into one. In Java, there are several ways to do it:
+
+**1. Using the `+` operator** (most common)
+```java
+String first = "Hello";
+String second = "World";
+String result = first + " " + second;  // "Hello World"
+```
+
+You can also mix strings with other types — Java automatically converts them:
+```java
+String message = "Age: " + 25;        // "Age: 25"
+String info = "Score: " + 99.5;       // "Score: 99.5"
+```
+
+**2. Using `+=`** (append to an existing string)
+```java
+String greeting = "Hello";
+greeting += " there!";   // greeting is now "Hello there!"
+```
+
+**3. Using `concat()` method**
+```java
+String first = "Hello";
+String second = "World";
+String result = first.concat(" ").concat(second);  // "Hello World"
+```
+
+**4. Using `StringBuilder`** (best for combining many strings, e.g. in a loop)
+```java
+StringBuilder sb = new StringBuilder();
+sb.append("Hello");
+sb.append(" ");
+sb.append("World");
+String result = sb.toString();  // "Hello World"
+```
+
+Why does `StringBuilder` matter? In Java, **Strings are immutable** — every time you use `+` to combine strings, it actually creates a brand new String object behind the scenes rather than modifying the original. That's fine for a few concatenations, but if you're doing it hundreds or thousands of times (like inside a loop), it gets wasteful. `StringBuilder` avoids this by building the string in a mutable buffer, only converting to a final `String` at the end.
+
+**Example: bad vs. good in a loop**
+```java
+// Inefficient — creates many intermediate String objects
+String result = "";
+for (int i = 0; i < 1000; i++) {
+    result += i + ", ";
+}
+
+// Efficient — modifies one buffer
+StringBuilder sb = new StringBuilder();
+for (int i = 0; i < 1000; i++) {
+    sb.append(i).append(", ");
+}
+String result = sb.toString();
+```
