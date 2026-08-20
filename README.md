@@ -1,6 +1,7 @@
 # Java-Finish-Line
 
-CORE 
+#CORE 
+
 **1-1 Declare variable**
 
 In Java, you declare a variable by specifying its **type**, then a **name**, and optionally assigning a value:
