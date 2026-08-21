@@ -1,6 +1,6 @@
 # Java-Finish-Line
 
-##CORE##
+### CORE
 
 **1-1 Declare variable**
 
@@ -116,7 +116,7 @@ String result = sb.toString();
 ```
 
 
-**1-3 Reading inputs from the console **
+**1-3 Reading inputs from the console**
 
 
 In Java, the most common way to read input from the console is using the **`Scanner`** class.
@@ -169,7 +169,7 @@ String name = scanner.nextLine();
 | `nextBoolean()` | true/false |
 | `nextLong()` | a long integer |
 
-**3. The classic "leftover newline" gotcha**
+** 3. "leftover newline" **
 
 This trips up almost everyone at some point. When you call `nextInt()`, `nextDouble()`, etc., it reads the *value* but leaves the newline character (`\n`) in the input buffer. If you then call `nextLine()`, it immediately grabs that leftover newline instead of waiting for new input — so it looks like it "skipped" your input.
 
@@ -208,7 +208,7 @@ if (scanner.hasNextInt()) {
     System.out.println("That's not a valid number!");
 }
 ```
-**1-4 print vs. println **
+**1-4 print vs. println**
 
 
 Both are used to display output to the console, but they differ in one key way:
@@ -260,8 +260,6 @@ System.out.println(name);
 // Output: Name: Alex   (on one line, because print() didn't break the line)
 ```
 
-This is actually a really common pattern — using `print()` for a label/prompt so the next thing appears right after it, then `println()` to finish the line.
-
 **Quick tip:** `println()` with no arguments just prints an empty line (like pressing Enter):
 ```java
 System.out.println("First line");
@@ -269,7 +267,7 @@ System.out.println();  // blank line
 System.out.println("Second line");
 ```
 
-**1-5 specific vs. wildcard imports **
+**1-5 specific vs. wildcard imports**
 
 
 In Java, `import` statements let you use classes from other packages without typing the full package path every time. There are two ways to do it:
@@ -317,7 +315,7 @@ That's why imports exist — they save you from typing this repeatedly.
 | Compile time | Slightly faster (technically) | Negligible difference in practice |
 | Name conflicts | Rare | More likely if two packages have same class name |
 
-**A gotcha with wildcards: naming conflicts**
+**wildcards: naming conflicts**
 ```java
 import java.util.*;
 import java.sql.*;
@@ -356,7 +354,7 @@ public class Main {
 }
 ```
 
-**1-6 identifiers **
+**1-6 Identifiers**
 
 
 In Java, an **identifier** is simply the name you give to things in your code — variables, methods, classes, interfaces, packages, etc. Anytime you're naming something, you're creating an identifier.
@@ -436,11 +434,121 @@ int _flag = true;   // legal, but unconventional
 ```
 You'll mostly see `$` in auto-generated code (like from compilers or frameworks) and `_` sometimes as a placeholder — Java actually reserves a single underscore (`_`) as a special "unused variable" marker in newer versions, so avoid using just `_` alone as a name.
 
-**Quick self-check example**
+
+
+**1-7 Variables**
+
+Let's go deeper into how variables actually work in Java.
+
+**1. Two categories of variables: primitive vs. reference**
+
+**Primitive types** — store the actual value directly, built into Java (8 total):
+
+| Type | Size | Example | Default value |
+|---|---|---|---|
+| `byte` | 1 byte | `byte b = 100;` | `0` |
+| `short` | 2 bytes | `short s = 30000;` | `0` |
+| `int` | 4 bytes | `int i = 100000;` | `0` |
+| `long` | 8 bytes | `long l = 100000L;` | `0L` |
+| `float` | 4 bytes | `float f = 3.14f;` | `0.0f` |
+| `double` | 8 bytes | `double d = 3.14159;` | `0.0` |
+| `char` | 2 bytes | `char c = 'A';` | `'\u0000'` |
+| `boolean` | 1 bit | `boolean flag = true;` | `false` |
+
+**Reference types** — store a reference (like an address) pointing to an object in memory, not the object itself:
+```java
+String name = "Alex";        // String is a reference type
+int[] numbers = {1, 2, 3};    // arrays are reference types
+Scanner scanner = new Scanner(System.in);  // objects in general
+```
+
+The practical difference matters most when you assign one variable to another:
+```java
+// Primitive — copies the actual value
+int a = 5;
+int b = a;
+b = 10;
+System.out.println(a);  // 5 (unaffected)
+
+// Reference — copies the reference, both point to same object
+int[] arr1 = {1, 2, 3};
+int[] arr2 = arr1;
+arr2[0] = 99;
+System.out.println(arr1[0]);  // 99 (changed! same underlying array)
+```
+
+**2. Three kinds of variables, based on where they're declared**
 
 ```java
-int 2ndPlace = 10;     // ❌ invalid — starts with digit
-String user-name = "x"; // ❌ invalid — hyphen not allowed
-double $balance = 5.5;  // ✅ valid, but unconventional
-boolean isReady = true; // ✅ valid and follows convention
+public class Employee {
+    static int companyCount = 0;   // static/class variable — shared by ALL objects
+    int employeeId;                 // instance variable — unique per object
+    
+    void printInfo() {
+        int yearsWorked = 5;        // local variable — only exists in this method
+        System.out.println(yearsWorked);
+    }
+}
 ```
+
+| Kind | Declared where | Belongs to | Default value? |
+|---|---|---|---|
+| Local | inside a method | that method call only | ❌ must initialize before use |
+| Instance | inside a class, outside methods | each object individually | ✅ gets default value |
+| Static | inside a class, with `static` keyword | the class itself, shared | ✅ gets default value |
+
+**Important:** local variables do NOT get default values — you must initialize them yourself, or the compiler throws an error:
+```java
+void method() {
+    int x;
+    System.out.println(x);  // ❌ compile error: "variable x might not have been initialized"
+}
+```
+But instance/static variables are automatically initialized:
+```java
+public class Example {
+    int count;  // automatically becomes 0, no error
+}
+```
+
+**3. Type casting — converting between types**
+
+Sometimes you need to convert one type to another:
+
+```java
+// Widening (automatic) — smaller type to bigger type, no data loss
+int i = 100;
+double d = i;  // 100.0, happens automatically
+
+// Narrowing (manual/explicit) — bigger type to smaller type, possible data loss
+double price = 19.99;
+int wholeNumber = (int) price;  // 19 — you must explicitly cast, decimal is truncated
+```
+
+**4. `final` variables — constants**
+
+Once assigned, a `final` variable can't be reassigned:
+```java
+final double PI = 3.14159;
+PI = 3.14;  // ❌ compile error — cannot assign a value to final variable
+```
+
+**Putting it together — a quick example showing all three kinds:**
+```java
+public class BankAccount {
+    static int totalAccounts = 0;   // static — shared across all accounts
+    double balance;                  // instance — each account has its own
+
+    BankAccount(double startingBalance) {
+        balance = startingBalance;
+        totalAccounts++;
+    }
+
+    void deposit(double amount) {
+        double newBalance = balance + amount;  // local — only exists here
+        balance = newBalance;
+    }
+}
+```
+
+
