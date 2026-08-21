@@ -2,24 +2,6 @@
 
 ### CORE
 
-**1**
-
-
-
-**Identifiers, variables, and data types form the core building blocks of any Java program. They work together to name, declare, and structure information stored in memory**
-**// [data type] [identifier] = [value];**
-
-
-**int studentAge = 20;
-Break this down:
-int → the data type (what kind of value it can hold)
-studentAge → the identifier (the name you chose)
-25 → the value being stored
-= → the assignment operator
-Every variable declaration in Java needs all three pieces working together: a type to define what data it holds, an identifier to name it, and (usually) a value.**
-
-
-
 **1-1 Declare variable**
 
 
