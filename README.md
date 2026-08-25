@@ -76,20 +76,11 @@ If you try to use one as a variable name, you'll get a compile error:
 int class = 5;  // ❌ Compile error — "class" is reserved
 ```
 
-**A note on `$` and `_`**
-
-Technically legal, but rarely used in normal code:
-```java
-int $total = 100;   // legal, but unconventional
-int _flag = true;   // legal, but unconventional
-```
-You'll mostly see `$` in auto-generated code (like from compilers or frameworks) and `_` sometimes as a placeholder — Java actually reserves a single underscore (`_`) as a special "unused variable" marker in newer versions, so avoid using just `_` alone as a name.
 
 
+### **1.1 Variables**
 
-### **1.1.1 Variables**
 
-Let's go deeper into how variables actually work in Java.
 
 **1. Two categories of variables: primitive vs. reference**
 
