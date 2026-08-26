@@ -5,7 +5,7 @@
 
 
 
-### **1.1 Identifiers**
+### **1. Identifiers**
 
 
 An **identifier** is simply the name you give to things in your code — variables, methods, classes, interfaces, packages, etc. Anytime you're naming something, you're creating an identifier.
@@ -118,7 +118,7 @@ int[] arr2 = arr1;
 arr2[0] = 99;
 System.out.println(arr1[0]);  // 99 (changed! same underlying array)
 ```
-### **1.1.2 Declare variable**
+### **1.2 Declare variable**
 
 
 Declare a variable by specifying its **type**, then a **name**, and optionally assigning a value:
@@ -193,7 +193,7 @@ public class Example {
 }
 ```
 
-**1.1.3 Type casting — converting between types**
+**1.3 Type casting — converting between types**
 
 Sometimes you need to convert one type to another:
 
@@ -207,7 +207,7 @@ double price = 19.99;
 int wholeNumber = (int) price;  // 19 — you must explicitly cast, decimal is truncated
 ```
 
-**1.1.4 `final` variables — constants**
+**1.4 `final` variables — constants**
 
 Once assigned, a `final` variable can't be reassigned:
 ```java
@@ -241,7 +241,7 @@ public class Main {
 }
 ```
 
-**2.1.2 Reading different data types**
+**2.1 Reading different data types**
 
 `Scanner` has different methods depending on what type of input you expect:
 
@@ -271,7 +271,7 @@ String name = scanner.nextLine();
 | `nextBoolean()` | true/false |
 | `nextLong()` | a long integer |
 
-**2.1.3"leftover newline"**
+**2.2 "leftover newline"**
 
 This trips up almost everyone at some point. When you call `nextInt()`, `nextDouble()`, etc., it reads the *value* but leaves the newline character (`\n`) in the input buffer. If you then call `nextLine()`, it immediately grabs that leftover newline instead of waiting for new input — so it looks like it "skipped" your input.
 
@@ -292,7 +292,7 @@ scanner.nextLine();  // consume leftover newline
 String name = scanner.nextLine();  // now works correctly
 ```
 
-**2.1.4 Reading multiple values on one line**
+**2.3 Reading multiple values on one line**
 ```java
 System.out.print("Enter three numbers separated by spaces: ");
 int a = scanner.nextInt();
@@ -305,7 +305,7 @@ int c = scanner.nextInt();
 
 **String concatenation** means joining two or more strings together into one. In Java, there are several ways to do it:
 
-**1. Using the `+` operator** (most common)
+**1.1 Using the `+` operator** (most common)
 ```java
 String first = "Hello";
 String second = "World";
@@ -447,4 +447,245 @@ In this case, you'd need to specify the full path anyway:
 ```java
 java.util.Date d = new java.util.Date();
 ```
+### **6. Numeric Operations**
 
+
+| Category | Operators |
+|---|---|
+| Arithmetic | `+` `-` `*` `/` `%` |
+| Increment/Decrement | `++` `--` |
+| Compound assignment | `+=` `-=` `*=` `/=` `%=` |
+| Comparison | `==` `!=` `>` `<` `>=` `<=` |
+| Logical | `&&` `\|\|` `!` |
+
+ **6.1 Arithmetic**
+
+ 
+**The 5 basic operators**
+
+```java
+int a = 10;
+int b = 3;
+
+a + b   // 13  → addition
+a - b   // 7   → subtraction
+a * b   // 30  → multiplication
+a / b   // 3   → division
+a % b   // 1   → remainder (what's left over)
+```
+
+**The one thing to watch out for**
+
+If both numbers are `int`, division drops the decimal part:
+```java
+int result = 7 / 2;   // 3, not 3.5
+```
+
+To get the decimal, make at least one number a `double`:
+```java
+double result = 7.0 / 2;   // 3.5
+```
+
+ **6.2 Increment/Decrement**
+
+
+**1. Basic usage**
+
+```java
+int x = 5;
+x++;   // x is now 6
+x--;   // x is now 5 again
+```
+
+
+**2. Pre-increment vs. post-increment — the important distinction**
+
+```java
+int a = 5;
+int b = a++;   // POST-increment: use a's CURRENT value first, THEN increment
+
+System.out.println(a);   // 6
+System.out.println(b);   // 5  ← got the OLD value of a
+```
+
+```java
+int c = 5;
+int d = ++c;   // PRE-increment: increment FIRST, THEN use the new value
+
+System.out.println(c);   // 6
+System.out.println(d);   // 6  ← got the NEW value of c
+```
+
+**Side-by-side comparison**
+
+| Expression | What happens | Value used |
+|---|---|---|
+| `x++` | increments *after* the value is used | old value |
+| `++x` | increments *before* the value is used | new value |
+| `x--` | decrements *after* the value is used | old value |
+| `--x` | decrements *before* the value is used | new value |
+
+**3. Same logic applies to decrement**
+
+```java
+int a = 10;
+int b = a--;   // b = 10 (old value), a becomes 9
+
+int c = 10;
+int d = --c;   // c becomes 9 first, d = 9 (new value)
+```
+### **6.3 Compound assignment**
+
+
+Compound assignment operators are shortcuts that combine an operation with assignment in one step.
+
+**The basic idea**
+
+Instead of writing this:
+```java
+x = x + 5;
+```
+
+You can write this:
+```java
+x += 5;
+```
+
+Both do exactly the same thing — just shorter.
+
+**The 5 compound operators**
+
+```java
+int x = 10;
+
+x += 5;   // same as x = x + 5   → 15
+x -= 3;   // same as x = x - 3   → 12
+x *= 2;   // same as x = x * 2   → 24
+x /= 4;   // same as x = x / 4   → 6
+x %= 4;   // same as x = x % 4   → 2
+```
+
+**Simple example**
+
+```java
+int score = 0;
+score += 10;   // score is now 10
+score += 10;   // score is now 20
+score -= 5;    // score is now 15
+```
+
+**6.4 Comparison**
+
+
+Comparison operators compare two values and give back `true` or `false`.
+
+**The 6 comparison operators**
+
+```java
+5 == 5   // true   → equal to
+5 != 3   // true   → not equal to
+5 > 3    // true   → greater than
+5 < 3    // false  → less than
+5 >= 5   // true   → greater than or equal to
+5 <= 4   // false  → less than or equal to
+```
+
+**Example**
+
+```java
+int age = 20;
+
+boolean isAdult = age >= 18;   // true
+boolean isChild = age < 13;     // false
+```
+
+**Watch out for**
+
+`==` (comparison) is easy to mix up with `=` (assignment):
+```java
+if (age == 18) { }   // ✅ checks if age equals 18
+if (age = 18) { }     // ❌ compile error for booleans — this assigns 18 to age instead
+```
+
+
+**6.5Logical**
+
+
+Logical operators combine multiple `true`/`false` conditions into one result.
+
+**The 3 logical operators**
+
+
+| Operator | Name | True when... |
+|---|---|---|
+| `&&` | AND | both sides are true |
+| `\|\|` | OR | at least one side is true |
+| `!` | NOT | flips true ↔ false |
+
+
+```java
+true && false   // false  → AND (both must be true)
+true || false   // true   → OR (at least one must be true)
+!true            // false  → NOT (flips the value)
+```
+
+**Example**
+
+```java
+int age = 20;
+boolean hasLicense = true;
+
+boolean canDrive = age >= 18 && hasLicense;   // true (both conditions true)
+```
+
+```java
+boolean isWeekend = true;
+boolean isHoliday = false;
+
+boolean isDayOff = isWeekend || isHoliday;     // true (at least one is true)
+```
+
+```java
+boolean isRaining = false;
+
+boolean goOutside = !isRaining;   // true (flips false to true)
+```
+
+**6.6 Casting**
+
+
+**Casting** = converting one data type into another.
+
+**Two types**
+
+```java
+int i = 100;
+double d = i;   // ✅ automatic — small type to big type
+```
+
+```java
+double price = 19.99;
+int whole = (int) price;   // ✅ manual — big type to small type, needs (type)
+```
+
+**The rule**
+
+- Small → big: automatic, no cast needed
+- Big → small: you must write `(type)` in front
+
+
+
+**6.7 BODMAS**
+
+BODMAS = the order Java follows when evaluating an expression with multiple operators.
+Brackets → Orders (powers/roots) → Division → Multiplication → Addition → Subtraction.
+
+
+
+```java
+2 + 3 * 4   // multiply first: 3*4=12, then 2+12 = 14
+```
+
+```java
+(2 + 3) * 4   // brackets first: 2+3=5, then 5*4 = 20
+```
