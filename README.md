@@ -5,7 +5,7 @@
 
 
 
-### **1. Identifiers**
+### **1.   Identifiers**
 
 
 An **identifier** is simply the name you give to things in your code — variables, methods, classes, interfaces, packages, etc. Anytime you're naming something, you're creating an identifier.
@@ -78,11 +78,11 @@ int class = 5;  // ❌ Compile error — "class" is reserved
 
 
 
-### **1.1 Variables**
+### **2.   Variables**
 
 
 
-**1. Two categories of variables: primitive vs. reference**
+**Two categories of variables: primitive vs. reference**
 
 **Primitive types** — store the actual value directly, built into Java (8 total):
 
@@ -118,7 +118,7 @@ int[] arr2 = arr1;
 arr2[0] = 99;
 System.out.println(arr1[0]);  // 99 (changed! same underlying array)
 ```
-### **1.2 Declare variable**
+### **2.1   Declare variable**
 
 
 Declare a variable by specifying its **type**, then a **name**, and optionally assigning a value:
@@ -160,7 +160,7 @@ final double PI = 3.14159;
 - Convention: use camelCase for variables (`firstName`, not `first_name`)
 - Can't use reserved keywords (`class`, `public`, `int`, etc.)
 
-**2. Three kinds of variables, based on where they're declared**
+**2.2   Three kinds of variables, based on where they're declared**
 ```java
 public class Example {
     int instanceVar = 10;      // instance variable (belongs to object)
@@ -193,7 +193,7 @@ public class Example {
 }
 ```
 
-**1.3 Type casting — converting between types**
+**2.3  Type casting — converting between types**
 
 Sometimes you need to convert one type to another:
 
@@ -207,7 +207,7 @@ double price = 19.99;
 int wholeNumber = (int) price;  // 19 — you must explicitly cast, decimal is truncated
 ```
 
-**1.4 `final` variables — constants**
+**2.4 `final` variables — constants**
 
 Once assigned, a `final` variable can't be reassigned:
 ```java
@@ -218,12 +218,12 @@ PI = 3.14;  // ❌ compile error — cannot assign a value to final variable
 
 
 
-### **2. Reading inputs from the console**
+### **3.   Reading inputs from the console**
 
 
 The most common way to read input from the console is using the **`Scanner`** class.
 
-**2.1.1 Basic setup**
+**Basic setup**
 ```java
 import java.util.Scanner;
 
@@ -241,7 +241,7 @@ public class Main {
 }
 ```
 
-**2.1 Reading different data types**
+**3.1    Reading different data types**
 
 `Scanner` has different methods depending on what type of input you expect:
 
@@ -271,7 +271,7 @@ String name = scanner.nextLine();
 | `nextBoolean()` | true/false |
 | `nextLong()` | a long integer |
 
-**2.2 "leftover newline"**
+**3.2   "leftover newline"**
 
 This trips up almost everyone at some point. When you call `nextInt()`, `nextDouble()`, etc., it reads the *value* but leaves the newline character (`\n`) in the input buffer. If you then call `nextLine()`, it immediately grabs that leftover newline instead of waiting for new input — so it looks like it "skipped" your input.
 
@@ -292,7 +292,7 @@ scanner.nextLine();  // consume leftover newline
 String name = scanner.nextLine();  // now works correctly
 ```
 
-**2.3 Reading multiple values on one line**
+**3.3   Reading multiple values on one line**
 ```java
 System.out.print("Enter three numbers separated by spaces: ");
 int a = scanner.nextInt();
@@ -300,12 +300,12 @@ int b = scanner.nextInt();
 int c = scanner.nextInt();
 ```
 
-### **3.  String Concatenation** 
+### **4.    String Concatenation** 
 
 
 **String concatenation** means joining two or more strings together into one. In Java, there are several ways to do it:
 
-**1.1 Using the `+` operator** (most common)
+**4.1  Using the `+` operator** (most common)
 ```java
 String first = "Hello";
 String second = "World";
@@ -318,20 +318,20 @@ String message = "Age: " + 25;        // "Age: 25"
 String info = "Score: " + 99.5;       // "Score: 99.5"
 ```
 
-**2. Using `+=`** (append to an existing string)
+**4.2   Using `+=`** (append to an existing string)
 ```java
 String greeting = "Hello";
 greeting += " there!";   // greeting is now "Hello there!"
 ```
 
-**3. Using `concat()` method**
+**4.3   Using `concat()` method**
 ```java
 String first = "Hello";
 String second = "World";
 String result = first.concat(" ").concat(second);  // "Hello World"
 ```
 
-**4. Using `StringBuilder`** (best for combining many strings, e.g. in a loop)
+**4.4   Using `StringBuilder`** (best for combining many strings, e.g. in a loop)
 ```java
 StringBuilder sb = new StringBuilder();
 sb.append("Hello");
@@ -342,7 +342,7 @@ String result = sb.toString();  // "Hello World"
 
 
 
-### **4. print vs. println**
+### **5.   print vs. println**
 
 
 Both are used to display output to the console, but they differ in one key way:
@@ -387,7 +387,7 @@ System.out.println();  // blank line
 System.out.println("Second line");
 ```
 
-### **5. specific vs. wildcard imports**
+### **6.   specific vs. wildcard imports**
 
 
 **`import`** statements let you use classes from other packages without typing the full package path every time. There are two ways to do it:
@@ -447,7 +447,7 @@ In this case, you'd need to specify the full path anyway:
 ```java
 java.util.Date d = new java.util.Date();
 ```
-### **6. Numeric Operations**
+### **7.   Numeric Operations**
 
 
 | Category | Operators |
@@ -458,7 +458,7 @@ java.util.Date d = new java.util.Date();
 | Comparison | `==` `!=` `>` `<` `>=` `<=` |
 | Logical | `&&` `\|\|` `!` |
 
- **6.1 Arithmetic**
+ **7.1   Arithmetic**
 
  
 **The 5 basic operators**
@@ -486,10 +486,10 @@ To get the decimal, make at least one number a `double`:
 double result = 7.0 / 2;   // 3.5
 ```
 
- **6.2 Increment/Decrement**
+ **7.2   Increment/Decrement**
 
 
-**1. Basic usage**
+**Basic usage**
 
 ```java
 int x = 5;
@@ -498,7 +498,7 @@ x--;   // x is now 5 again
 ```
 
 
-**2. Pre-increment vs. post-increment — the important distinction**
+**Pre-increment vs. post-increment — the important distinction**
 
 ```java
 int a = 5;
@@ -525,7 +525,7 @@ System.out.println(d);   // 6  ← got the NEW value of c
 | `x--` | decrements *after* the value is used | old value |
 | `--x` | decrements *before* the value is used | new value |
 
-**3. Same logic applies to decrement**
+**Same logic applies to decrement**
 
 ```java
 int a = 10;
@@ -534,7 +534,7 @@ int b = a--;   // b = 10 (old value), a becomes 9
 int c = 10;
 int d = --c;   // c becomes 9 first, d = 9 (new value)
 ```
-### **6.3 Compound assignment**
+### **7.3   Compound assignment**
 
 
 Compound assignment operators are shortcuts that combine an operation with assignment in one step.
@@ -574,7 +574,7 @@ score += 10;   // score is now 20
 score -= 5;    // score is now 15
 ```
 
-**6.4 Comparison**
+**7.4   Comparison**
 
 
 Comparison operators compare two values and give back `true` or `false`.
@@ -608,7 +608,7 @@ if (age = 18) { }     // ❌ compile error for booleans — this assigns 18 to a
 ```
 
 
-**6.5Logical**
+**7.5   Logical**
 
 
 Logical operators combine multiple `true`/`false` conditions into one result.
@@ -651,7 +651,7 @@ boolean isRaining = false;
 boolean goOutside = !isRaining;   // true (flips false to true)
 ```
 
-**6.6 Casting**
+**7.6  Casting**
 
 
 **Casting** = converting one data type into another.
@@ -675,7 +675,7 @@ int whole = (int) price;   // ✅ manual — big type to small type, needs (type
 
 
 
-**6.7 BODMAS**
+**7.7   BODMAS**
 
 BODMAS = the order Java follows when evaluating an expression with multiple operators.
 Brackets → Orders (powers/roots) → Division → Multiplication → Addition → Subtraction.
